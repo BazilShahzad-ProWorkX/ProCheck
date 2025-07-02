@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Panel - RideCheckPro</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f4f6f8;
+    }
+    h2 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .logout {
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    th {
+      background: #0070ba;
+      color: #fff;
+      font-weight: 600;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      tr {
+        margin-bottom: 15px;
+        background: #fff;
+        padding: 10px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      }
+      td {
+        border: none;
+        padding: 8px 0;
+      }
+      td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>RideCheckPro Orders</h2>
+  <div class="logout">
+    <a href="/logout">Logout</a>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>VIN</th>
+        <th>Country</th>
+        <th>Status</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% orders.forEach(order => { %>
+        <tr>
+          <td data-label="Full Name"><%= order.fullName || '' %></td>
+          <td data-label="Email"><%= order.email || '' %></td>
+          <td data-label="Phone"><%= order.phone || '' %></td>
+          <td data-label="VIN"><%= order.vin || '' %></td>
+          <td data-label="Country"><%= order.country || '' %></td>
+          <td data-label="Status"><%= order.paymentStatus || 'Pending' %></td>
+          <td data-label="Date"><%= new Date(order.submittedAt).toLocaleString() %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Car Inspection | ProCheck</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">ProCheck</div>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#vin-report">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#footer-contact">Contact</a>
+        <a href="form.html" class="cta-btn">Order Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="text-content">
+        <h1>Get Your Vehicle Professionally Inspected</h1>
+        <p>We provide accurate, reliable, and fast car inspection reports from certified experts across the US.</p>
+        <a href="form.html" class="cta-btn">Book Inspection</a>
+      </div>
+      <div class="image-content">
+        <img src="images/hero-car.png" alt="Car Inspection Hero">
+      </div>
+    </div>
+  </section>
+
+    <!-- About - 3 Easy Steps -->
+    <section class="steps">
+    <div class="container">
+        <h2>Get your vehicle history report<br>in 3 easy steps</h2>
+        <p class="subtitle">Fast, Secure, and Comprehensive Reports</p>
+
+        <div class="steps-grid">
+        <div class="step">
+            <h3>Step 1</h3>
+            <p>Search by vehicle identification number (VIN) to find the car you want to research.</p>
+        </div>
+        <div class="step">
+            <h3>Step 2</h3>
+            <p>Complete your purchase through our secure checkout system.</p>
+        </div>
+        <div class="step">
+            <h3>Step 3</h3>
+            <p>The vehicle history report will be sent to your email address immediately.</p>
+        </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- Warning Stats -->
+    <section class="risk">
+    <div class="container">
+        <h2>Don't Play with Risk!</h2>
+        <p class="subtitle">Make an informed decision — make sure your car is a trusty companion.</p>
+
+        <div class="stats">
+        <div class="stat-box">
+            <h3>25%</h3>
+            <p>Rise in car theft in the United States over the past few years.</p>
+        </div>
+        <div class="stat-box">
+            <h3>70%</h3>
+            <p>Car buyers have experienced intentional deception from sellers.</p>
+        </div>
+        <div class="stat-box">
+            <h3>50%</h3>
+            <p>Of used cars show hidden issues, including damage.</p>
+        </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- VIN Explanation -->
+    <section class="vin-info">
+    <div class="container">
+        <h2>What is a VIN?</h2>
+        <p>The VIN – Vehicle Identification Number – is a unique code and identifier that allows for the identification of a particular vehicle. It’s essential for registration, insurance, and checking history with a VIN decoder.</p>
+
+        <h2>Where to find a VIN?</h2>
+        <p>The VIN is located on permanent parts of the body, often on the driver’s side dashboard, engine bay, trunk, floor, or passenger door frame depending on the vehicle brand.</p>
+    </div>
+    </section>
+
+    <!-- VIN CTA -->
+    <section  id="vin-report" class="vin-report">
+    <div class="container">
+        <h2>Car History Report</h2>
+        <p>Avoid costly problems by checking a car’s history. Just enter the VIN and get a full report.</p>
+        <p class="price">Starting from <strong>$39.99</strong></p>
+
+        <form class="vin-form" id="vinForm">
+        <input
+            type="text"
+            name="vin"
+            id="vinInput"
+            maxlength="17"
+            placeholder="Enter your 17-digit VIN"
+            required
+        />
+        <button type="submit">Get Report</button>
+        </form>
+    </div>
+    </section>
+
+
+    <!-- Testamonials -->
+    <section class="testimonials">
+    <div class="container">
+        <h2>What people are saying about our service</h2>
+        <p class="subtitle">Real Experiences from Satisfied Customers.</p>
+
+        <div class="google-rating">
+        <img src="images/google-logo.png" alt="Google" />
+        <div class="stars">★★★★★</div>
+        </div>
+
+        <div class="testimonial-wrapper">
+        <button class="arrow left" onclick="scrollLeft()">‹</button>
+        <div class="testimonial-carousel" id="testimonial-carousel">
+            <!-- Cards - add 10 like before -->
+            <div class="testimonial-card">
+                <div class="avatar">M</div>
+                <h3>Robert H.</h3>
+                <p>I used ProCheck to check a used car’s history. Solid report!</p>
+                <div class="stars">★★★★★</div>
+                <span class="date">October 15, 2022 <img src="images/google-icon.png" class="google-icon" /></span>
+            </div>
+            <div class="testimonial-card">
+                <div class="avatar">M</div>
+                <h3>Robert H.</h3>
+                <p>I used ProCheck to check a used car’s history. Solid report!</p>
+                <div class="stars">★★★★★</div>
+                <span class="date">October 15, 2022 <img src="images/google-icon.png" class="google-icon" /></span>
+            </div>
+            <div class="testimonial-card">
+                <div class="avatar">M</div>
+                <h3>Robert H.</h3>
+                <p>I used ProCheck to check a used car’s history. Solid report!</p>
+                <div class="stars">★★★★★</div>
+                <span class="date">October 15, 2022 <img src="images/google-icon.png" class="google-icon" /></span>
+            </div>
+            <div class="testimonial-card">
+                <div class="avatar">M</div>
+                <h3>Robert H.</h3>
+                <p>I used ProCheck to check a used car’s history. Solid report!</p>
+                <div class="stars">★★★★★</div>
+                <span class="date">October 15, 2022 <img src="images/google-icon.png" class="google-icon" /></span>
+            </div>
+            <div class="testimonial-card">
+                <div class="avatar">M</div>
+                <h3>Robert H.</h3>
+                <p>I used ProCheck to check a used car’s history. Solid report!</p>
+                <div class="stars">★★★★★</div>
+                <span class="date">October 15, 2022 <img src="images/google-icon.png" class="google-icon" /></span>
+            </div>
+            <div class="testimonial-card">
+                <div class="avatar">M</div>
+                <h3>Robert H.</h3>
+                <p>I used ProCheck to check a used car’s history. Solid report!</p>
+                <div class="stars">★★★★★</div>
+                <span class="date">October 15, 2022 <img src="images/google-icon.png" class="google-icon" /></span>
+            </div>
+        </div>
+        <button class="arrow right" onclick="scrollRight()">›</button>
+        </div>
+    </div>
+    </section>
+
+ 
+
+    <!-- NMVTIS Certification Section -->
+    <section class="certification">
+    <div class="container">
+        <h2>ProCheck is certified by NMVTIS & US Department of Justice</h2>
+        <div class="cert-logos">
+        <img src="images/doj-seal.png" alt="Department of Justice">
+        <img src="images/nmvtis-logo.png" alt="NMVTIS">
+        </div>
+    </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+    <div class="container footer-content">
+        <div class="footer-left">
+        <h3 class="logo">procheck<span>.</span></h3>
+        <p>
+            Empower your vehicle purchase with our comprehensive VIN check service.<br />
+            Discover essential details, make informed choices, and drive away with peace of mind.
+        </p>
+        </div>
+
+        <div class="footer-links">
+        <h4>Quick links</h4>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+        </ul>
+        </div>
+
+        <div id="footer-contact" class="footer-contact">
+            <h4>Contact Us</h4>
+            <p>expertsprocheck@gmail.com</p>
+            <p>Address: Old Redmond Rd Washington</p>
+            <div class="payment-logos">
+                <img src="images/visa.png" alt="Visa" />
+                <img src="images/master-card.png" alt="MasterCard" />
+                <img src="images/discover.png" alt="Discover" />
+                <img src="images/amex.png" alt="American Express" />
+            </div>
+        </div>
+    </div>
+    </footer>
+
+
+  <!-- JS (optional animations later) -->
+  <script src="js/script.js"></script>
+</body>
+</html>

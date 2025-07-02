@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - Vehicle Report</title>
+  <script src="https://www.paypal.com/sdk/js?client-id=AZnN-IwxrxM_W2Z5-C10wQkP0DFVaL5NdEEH9Br-1aOUac0xuyhONgxBjs4up9nz6bux1wTi0EkrIKqP&currency=USD"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f9fb;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+      padding: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap:40px;
+    }
+
+    .form-section, .summary-section {
+      flex: 1 1 45%;
+      min-width: 300px;
+      box-sizing: border-box;
+    }
+
+    .form-section {
+      padding-right: 20px;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    .summary-box {
+      background: #f4f6f9;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .summary-box img {
+      max-width: 100px;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 20px;
+      color: #0070ba;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    #paypal-button-container {
+      margin-top: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .form-section {
+        padding-right: 0;
+        margin-bottom: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Form Section -->
+  <div class="form-section">
+    <h2>Billing Information</h2>
+    <form id="checkout-form">
+      <div class="form-group">
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" name="fullName" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number *</label>
+        <input type="tel" id="phone" name="phone" required />
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country *</label>
+        <select id="country" name="country" required>
+          <option value="">Select Country</option>
+          <option value="USA">United States</option>
+          <option value="UK">United Kingdom</option>
+          <option value="Canada">Canada</option>
+          <option value="Pakistan">Pakistan</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="vin">VIN Number *</label>
+        <input type="text" id="vin" name="vin" maxlength="17" required />
+      </div>
+
+      <div class="form-group">
+        <label for="note">Note (optional)</label>
+        <textarea id="note" name="note" placeholder="Add any specific request or comment"></textarea>
+      </div>
+    </form>
+  </div>
+
+  <!-- Payment Summary Section -->
+  <div class="summary-section">
+    <h2>Payment Summary</h2>
+    <div class="summary-box">
+      <img src="images/car.png" alt="Car Image" />
+      <p>Vehicle History Report</p>
+      <p class="price">$39.99</p>
+    </div>
+
+    <div id="paypal-button-container"></div>
+  </div>
+</div>
+
+<!-- PayPal Script -->
+<script>
+  // Auto-fill VIN from URL param
+  const params = new URLSearchParams(window.location.search);
+  const vinFromURL = params.get('vin');
+  if (vinFromURL && vinFromURL.length === 17) {
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("vin").value = vinFromURL;
+    });
+  }
+
+  paypal.Buttons({
+    style: {
+      layout: 'vertical',
+      color: 'blue',
+      shape: 'rect',
+      label: 'paypal'
+    },
+    createOrder: function() {
+      const form = document.getElementById("checkout-form");
+      if (!form.checkValidity()) {
+        alert("Please fill out all required fields.");
+        return Promise.reject("Form validation failed.");
+      }
+
+      return fetch('/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: 39.99 })
+      })
+      .then(res => res.json())
+      .then(order => order.id);
+    },
+
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        const form = document.getElementById("checkout-form");
+        const formData = new FormData(form);
+        const json = {};
+        formData.forEach((v, k) => json[k] = v);
+
+        json.paymentMethod = 'PayPal';
+        json.paymentStatus = details.status;
+        json.payerEmail = details.payer.email_address;
+        json.paypalTransactionId = details.purchase_units[0].payments.captures[0].id;
+        json.paypalOrderId = data.orderID;
+
+        return fetch('/submit-form', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(json)
+        })
+        .then(res => res.json())
+        .then(response => {
+          if (response.message) {
+             window.location.href = "/thankyou.html"; // ✅ redirect to the thank you page
+          }else{
+            alert("Something went wrong. Please contact support.");
+          }
+        })
+        .catch(err => {
+          console.error("Form Submit Error:", err);
+          alert("Something went wrong. Please contact support.");
+        });
+      });
+    }
+
+  }).render('#paypal-button-container');
+</script>
+
+</body>
+</html>
