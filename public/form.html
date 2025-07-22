@@ -179,7 +179,7 @@
     <div class="summary-box">
       <img src="images/car.png" alt="Car Image" />
       <p>Vehicle History Report</p>
-      <p class="price">$39.99</p>
+      <p class="price">$24.99</p>
     </div>
 
     <div id="paypal-button-container"></div>
@@ -214,7 +214,7 @@
         return fetch('/create-order', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ amount: 39.99 })
+          body: JSON.stringify({ amount: 24.99 })
         })
         .then(res => res.json())
         .then(order => order.id);
